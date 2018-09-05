@@ -1,0 +1,17 @@
+{
+    "name": "karagulle/yapikredi",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "mckaragulle",
+            "email": "mustafacelalettinkaragulle@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload":{
+        "psr-4": {
+            "Karagulle\\Yapikredi\\":"src"
+        }
+    }
+}
