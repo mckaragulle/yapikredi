@@ -3,6 +3,7 @@ namespace Karagulle\Yapikredi\PosnetOOS;
 use Karagulle\Yapikredi\PosnetOOS\PosnetOOSXML;
 use Karagulle\Yapikredi\PosnetHTTP\PosnetHTTPConection;
 use Karagulle\Yapikredi\PosnetENC\PosnetENC;
+use Karagulle\Yapikredi\PosnetXML\MerchantInfo;
 define('INTERVALTIMEFORPOSNETTRAN', 2 * 60 * 60 * 1000);
 
 class PosnetOOS
