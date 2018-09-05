@@ -1,41 +1,9 @@
 <?php
 
-
-/**
- * It is used for a template class for merchant info.
- */
-class MerchantInfo
-{
-    /**
-     * Merchant ID (10 char).
-     *
-     * @var string
-     */
-    public $mid = '';
-    /**
-     * Terminal ID (8 char).
-     *
-     * @var string
-     */
-    public $tid = '';
-    /**
-     * Username (8 char) for being used to login PosnetXML Service.
-     *
-     * @var string
-     */
-    public $username = '';
-    /**
-     * Password (8 char) for being used to login PosnetXML Service.
-     *
-     * @var string
-     */
-    public $password = '';
-}
-
 /**
  * It is used for a template class for transaction requests.
  */
-class PosnetRequest
+class PosnetOOSRequest
 {
     /**
      * Creditcard number (16-19 char).
@@ -57,15 +25,14 @@ class PosnetRequest
      */
     public $cvc;
     /**
-     * Order ID(24 chars). Distinguishes this transaction from the others.
-     * Should be different in each authorization, sale or bonus usage transaction.
+     * XID(20 chars). Distinguishes this transaction from the others.
+     * Should be different in each authorization or sale transaction.
      * Can be alpha-numeric. To specify a distinct one in each authorization,
-     * you can combine your mid, date, time an incrementing 2 digit number.
-     * e.g. 670000006701040316155901.
+     * e.g. 67000000670104031615.
      *
      * @var string
      */
-    public $orderid;
+    public $xid;
     /**
      * Transaction amount (1-12 chars) in YKr (100 YTLs) (12 chars). Last 2 digits are always assumed to be YKr.
      * Should contain no thousands or decimal separator.
@@ -75,15 +42,6 @@ class PosnetRequest
      * @var string
      */
     public $amount;
-    /**
-     * Transaction wpamount (1-12 chars) in YKr (100 YTLs) (12 chars). Last 2 digits are always assumed to be YKr.
-     * Should contain no thousands or decimal separator.
-     * e.g. 10 YTL : 1000
-     * e.g. 1.015,16 YTL : 101516.
-     *
-     * @var string
-     */
-    public $wpamount;
     /**
      * Curency Code (2 chars) for a transaction request
      * e.g. : YT.
@@ -100,64 +58,44 @@ class PosnetRequest
      */
     public $instnumber;
     /**
-     * Hostlogkey (18 chars) returned from authorization or sale transaction.
-     * This value will be used in the reversal or capture of this transaction.
+     * Type of a transaction.
+     * e.g. : Auth or Sale.
      *
      * @var string
      */
-    public $hostlogkey;
+    public $trantype;
     /**
-     * Authorization code (6 chars) returned from authorization or sale transaction.
-     * This value will be used in the reversal or capture of this transaction.
+     * CardHolder Name (1 - 50 chars)
+     * e.g. : XXXX YYYYYYY.
      *
      * @var string
      */
-    public $authcode;
+    public $cardholdername;
+
     /**
-     * Campaign Name (4 chars) is used for Forward Sale Transaction
-     * e.g. : K001.
+     * BankData.
      *
      * @var string
      */
-    public $vftcode;
+    public $bankData = '';
     /**
-     * Specifies how many extra (6 chars) WorldPoints card holder will get.
-     * Normally, card holders get no extra WorldPoints, that is when they pay 1 YTL,
-     * they get 1 WorldPoint. When you, for instance, specify 10 in this parameter for
-     * a shopping of 100 YTL, a card holder will get 110 WorldPoints instead of 100.
-     * e.g. : 000010.
+     * Merchant Data.
      *
      * @var string
      */
-    public $extrapoint; // fix 6 char, Ex : 000000
+    public $merchantData = '';
     /**
-     * Specifies how many multiple (2 chars) WorldPoints card holder will get.
-     * Normally, card holders get 1 multiple WorldPoints, that is when they pay 1 YTL,
-     * they get 1 WorldPoint. When you, for instance, specify 2 in this parameter for
-     * a shopping of 100 YTL, a card holder will get 200 WorldPoints instead of 100.
-     * e.g. : 02.
+     * Sign of parameters.
      *
      * @var string
      */
-    public $multiplepoint;
-    /**
-     * It is used for setting koicode for Joker Vadaa.
-     * Available koicodes can be inqueried by DoKOIInquiryTran function.
-     *
-     *  1    Ek Taksit
-     *  2    Taksit Atlatma
-     *  3    Ekstra Puan
-     *  4    Kontur Kazan�m
-     *  5    Ekstre Erteleme
-     *  6    �zel Vade Fark�
-     */
-    public $koicode;
+    public $sign = '';
 }
 
 /**
- * It is used for a template class for transaction responses.
+ * It is used for a template class for oos transaction responses.
  */
-class PosnetResponse
+class PosnetOOSResponse
 {
     /**
      * Result of transaction (1 char). Shows if the transaction was approved.
@@ -185,58 +123,149 @@ class PosnetResponse
      */
     public $errormessage;
     /**
+     * data1 is used for redirecting to YKB Site.
+     *
+     * @var string
+     */
+    public $data1;
+    /**
+     * data2 is used for redirecting to YKB Site with CreditCard Parameters.
+     *
+     * @var string
+     */
+    public $data2;
+    /**
+     * sign.
+     *
+     * @var string
+     */
+    public $sign;
+
+    /**
+     * Merchant ID (10 char).
+     *
+     * @var string
+     */
+    public $mid = '';
+    /**
+     * Terminal ID (8 char).
+     *
+     * @var string
+     */
+    public $tid = '';
+    /**
      * Hostlogkey (18 chars) returned from authorization or sale transaction.
      *
      * This value will be used in the reversal or capture of this transaction. * @var string
      * @var string
      */
-    public $hostlogkey;
+    public $hostlogkey = '';
     /**
      * Authorization code (6 chars) returned from authorization or sale transaction.
      * This value will be used in the reversal or capture of this transaction.
      *
      * @var string
      */
-    public $authcode;
+    public $authcode = '';
 
     /**
      * Instalment number (2 chars).
      *
      * @var string
      */
-    public $instcount;
+    public $instcount = '';
     /**
      * Amount (1-12 chars) of each instalment.
      *
      * @var string
      */
-    public $instamount;
+    public $instamount = '';
 
     /**
      * WorldPoints (8 chars) gained from this transaction.
      *
      * @var string
      */
-    public $point;
+    public $point = '';
     /**
      * YTL equivalent (12 chars) of  WorldPoints gained from this transaction.
      *
      * @var string
      */
-    public $pointAmount;
+    public $pointAmount = '';
     /**
      * WorldPoints (8 chars) the card holder has.
      *
      * @var string
      */
-    public $totalPoint;
+    public $totalPoint = '';
     /**
      * YTL equivalent (12 chars) of  WorldPoints the card holder has.
      *
      * @var string
      */
-    public $totalPointAmount;
-
+    public $totalPointAmount = '';
+    /**
+     * XID(20 chars). Distinguishes this transaction from the others.
+     * Should be different in each authorization, sale or bonus usage transaction.
+     * Can be alpha-numeric.
+     * e.g. YKB_0000050228175132.
+     *
+     * @var string
+     */
+    public $xid = '';
+    /**
+     * Transaction amount (1-12 chars) in YKr (100 YTLs) (12 chars). Last 2 digits are always assumed to be YKr.
+     * Should contain no thousands or decimal separator.
+     * e.g. 10 YTL : 1000
+     * e.g. 1.015,16 YTL : 101516.
+     *
+     * @var string
+     */
+    public $amount = '';
+    /**
+     * Curency Code (2 chars) for a transaction request
+     * e.g. : YT.
+     *
+     * @var string
+     */
+    public $currency = '';
+    /**
+     * Web URL of XML Service (not used).
+     *
+     * @var string
+     */
+    public $weburl;
+    /**
+     * Server IP  (not used).
+     *
+     * @var string
+     */
+    public $hostip;
+    /**
+     * Server port  (not used).
+     *
+     * @var string
+     */
+    public $port;
+    /**
+     * ThreeD Secure transaction status.
+     *
+     * @var string
+     */
+    public $tds_tx_status;
+    /**
+     * ThreeD Secure result code.
+     *
+     * @var string
+     */
+    public $tds_md_status;
+    /**
+     * ThreeD Secure error message.
+     *
+     * @var string
+     */
+    public $tds_md_errormessage;
     /**
      * Amount (1-12 chars) of vade applied to vft transaction.
      *
@@ -256,11 +285,21 @@ class PosnetResponse
      * @var string
      */
     public $vft_daycount;
-
     /**
-     * @var array
+     * Tran time.
+     *
+     * @var string
      */
-    public $koiInfo;
+    public $trantime;
+    /**
+     * Kontur amount (1-12 chars) in YKr (100 YTLs) (12 chars). Last 2 digits are always assumed to be YKr.
+     * Should contain no thousands or decimal separator.
+     * e.g. 10 YTL : 1000
+     * e.g. 1.015,16 YTL : 101516.
+     *
+     * @var string
+     */
+    public $kontur_amount = '';
 
     public function __construct()
     {
@@ -276,21 +315,18 @@ class PosnetResponse
         $this->errorcode = '';
         $this->errormessage = '';
 
-        $this->hostlogkey = '';
-        $this->authcode = '';
+        $this->data1 = '';
+        $this->data2 = '';
+        $this->sign = '';
 
-        $this->instcount = '';
-        $this->instamount = '';
+        $this->weburl = '';
+        $this->hostip = '';
+        $this->port = '';
 
-        $this->point = '';
-        $this->pointAmount = '';
-        $this->totalPoint = '';
-        $this->totalPointAmount = '';
+        $this->tds_tx_status = '';
+        $this->tds_md_status = '';
+        $this->tds_md_errormessage = '';
 
-        $this->vft_amount = '';
-        $this->vft_rate = '';
-        $this->vft_daycount = '';
-
-        $this->koiInfo = null;
+        $this->trantime = '';
     }
 }
