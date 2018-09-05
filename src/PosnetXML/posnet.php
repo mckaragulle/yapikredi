@@ -1,18 +1,7 @@
 <?php
-/*
- * posnet.php
- *
- */
-
-if (!defined('POSNET_MODULES_DIR')) {
-    define('POSNET_MODULES_DIR', dirname(__FILE__).'/..');
-}
-
-// Include posnet xml library
-require_once 'posnet_xml.php';
-
-// Include posnet http library
-require_once POSNET_MODULES_DIR.'/PosnetHTTP/posnet_http.php';
+namespace Karagulle\Yapikredi\PosnetXML;
+use Karagulle\Yapikredi\PosnetXML\PosnetXML;
+use Karagulle\Yapikredi\PosnetHTTP\PosnetHTTPConection;
 
 class Posnet extends PosnetHTTPConection
 {

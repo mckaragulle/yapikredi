@@ -1,17 +1,8 @@
 <?php
-/*
- * posnet_oos_xml.php
- *
- */
-
-if (!defined('POSNET_MODULES_DIR')) {
-    define('POSNET_MODULES_DIR', dirname(__FILE__).'/..');
-}
-
-// Include posnet helper library
-require_once 'posnet_oos_struct.php';
-// Include the xml library
-require_once POSNET_MODULES_DIR.'/XML/xml.php';
+namespace Karagulle\Yapikredi\PosnetOOS;
+use Karagulle\Yapikredi\PosnetOOS\PosnetOOSRequest;
+use Karagulle\Yapikredi\PosnetOOS\PosnetOOSResponse;
+use Karagulle\Yapikredi\XML\XML;
 
 class PosnetOOSXML extends XML
 {

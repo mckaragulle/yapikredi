@@ -1,5 +1,5 @@
 <?php
-
+namespace Karagulle\Yapikredi\PosnetXML;
 
 /**
  * It is used for a template class for merchant info.

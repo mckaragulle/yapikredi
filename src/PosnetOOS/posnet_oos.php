@@ -1,21 +1,9 @@
 <?php
-/*
- * posnet_oos.php
- *
- */
-
-if (!defined('POSNET_MODULES_DIR')) {
-    define('POSNET_MODULES_DIR', dirname(__FILE__).'/..');
-}
-
+namespace Karagulle\Yapikredi\PosnetOOS;
+use Karagulle\Yapikredi\PosnetOOS\PosnetOOSXML;
+use Karagulle\Yapikredi\PosnetHTTP\PosnetHTTPConection;
+use Karagulle\Yapikredi\PosnetENC\PosnetENC;
 define('INTERVALTIMEFORPOSNETTRAN', 2 * 60 * 60 * 1000);
-
-// Include posnet xml library
-require_once 'posnet_oos_xml.php';
-// Include posnet http library
-require_once POSNET_MODULES_DIR.'/PosnetHTTP/posnet_http.php';
-// Include posnet encryption library
-require_once POSNET_MODULES_DIR.'/PosnetENC/posnet_enc.php';
 
 class PosnetOOS
 {

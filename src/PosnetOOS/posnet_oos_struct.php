@@ -1,5 +1,5 @@
 <?php
-
+namespace Karagulle\Yapikredi\PosnetOOS;
 /**
  * It is used for a template class for transaction requests.
  */

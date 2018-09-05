@@ -1,18 +1,9 @@
 <?php
-/*
- * posnet_xml.php
- *
- */
-
-if (!defined('POSNET_MODULES_DIR')) {
-    define('POSNET_MODULES_DIR', dirname(__FILE__).'/..');
-}
-
-// Include posnet helper library
-require_once 'posnet_struct.php';
-// Include the xml library
-require_once POSNET_MODULES_DIR.'/XML/xml.php';
-
+namespace Karagulle\Yapikredi\PosnetXML;
+use Karagulle\Yapikredi\PosnetXML\MerchantInfo;
+use Karagulle\Yapikredi\PosnetXML\PosnetRequest;
+use Karagulle\Yapikredi\PosnetXML\PosnetResponse;
+use Karagulle\Yapikredi\XML\XML;
 class PosnetXML extends XML
 {
     /**

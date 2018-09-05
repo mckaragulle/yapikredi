@@ -1,15 +1,6 @@
 <?php
-/*
- * posnet_http.php
- *
- */
-
-if (!defined('POSNET_MODULES_DIR')) {
-    define('POSNET_MODULES_DIR', dirname(__FILE__).'/..');
-}
-
-// Include the http library
-require_once POSNET_MODULES_DIR.'/HTTP/http.php';
+namespace Karagulle\Yapikredi\PosnetHTTP;
+use Karagulle\Yapikredi\HTTP\HTTP;
 
 class PosnetHTTPConection
 {

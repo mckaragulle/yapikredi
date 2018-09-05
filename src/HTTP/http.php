@@ -1,10 +1,5 @@
 <?php
-/*
- * http.php
- *
- * @(#) $Header: /opt2/ena/metal/http/http.php,v 1.94 2016/05/03 02:07:04 mlemos Exp $
- *
- */
+namespace Karagulle\Yapikredi\HTTP;
 
 define('HTTP_CLIENT_ERROR_UNSPECIFIED_ERROR', -1);
 define('HTTP_CLIENT_ERROR_NO_ERROR', 0);

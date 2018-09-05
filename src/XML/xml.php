@@ -1,4 +1,5 @@
 <?php
+namespace Karagulle\Yapikredi\XML;
 
 // Define element type constants
 define('XML_TYPE_NODE', 1);

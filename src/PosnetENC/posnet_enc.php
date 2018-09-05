@@ -1,5 +1,5 @@
 <?php
-
+namespace Karagulle\Yapikredi\PosnetENC;
 
 /**
  * It is used for encryption.
