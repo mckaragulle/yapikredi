@@ -525,11 +525,7 @@ class PosnetOOS
      *
      * @return bool
      */
-    public function CheckAndResolveMerchantData(
-        $merchantData,
-        $bankData,
-        $sign
-    ) {
+    public function CheckAndResolveMerchantData($merchantData, $bankData, $sign) {
         //Create Posnet Response Class
         $this->posnetOOSResponse = new PosnetOOSResponse();
 
@@ -541,9 +537,9 @@ class PosnetOOS
         )) {
             return false;
         }
-
+        $USEMCRYPTLIBRARY=false;
         //Use MCrypt Library
-        if ($USEMCRYPTLIBRARY = true) {
+        if ($USEMCRYPTLIBRARY == true) {
             if (!function_exists('mcrypt_module_open')) {
                 $this->posnetOOSResponse->errormessage = 'MCRYPT MODULU YUKLU DEGIL';
 
